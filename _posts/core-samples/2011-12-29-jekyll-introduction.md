@@ -4,7 +4,14 @@ category : lessons
 tagline: "Supporting tagline"
 tags : [intro, beginner, jekyll, tutorial]
 ---
+
 {% include JB/setup %}
+
+<link rel="stylesheet" type="text/css" href="{{ root }}/css/pygments/friendly.css" />
+
+`sdf`
+
+`日记`
 
 This Jekyll introduction will outline specifically  what Jekyll is and why you would want to use it.
 Directly following the intro we'll learn exactly _how_ Jekyll does what it does.
@@ -20,7 +27,38 @@ dynamic components such as templates, partials, liquid code, markdown, etc. Jeky
 
 This website is created with Jekyll. [Other Jekyll websites](https://github.com/mojombo/jekyll/wiki/Sites).
 
+{% highlight ruby %}
+module Jekyll
 
+      @site = site
+      @base = base
+      @dir = dir
+      @name = 'index.html'
+
+      self.process(@name)
+      self.read_yaml(File.join(base, '_layouts'), 'category_index.html')
+      self.data['category'] = category
+
+      category_title_prefix = site.config['category_title_prefix'] || 'Category: '
+      self.data['title'] = "#{category_title_prefix}#{category}"
+    end
+  end
+
+  class CategoryPageGenerator < Generator
+    safe true
+
+    def generate(site)
+      if site.layouts.key? 'category_index'
+        dir = site.config['category_dir'] || 'categories'
+        site.categories.keys.each do |category|
+          site.pages << CategoryPage.new(site, site.source, File.join(dir, category), category)
+        end
+      end
+    end
+  end
+
+end
+{% endhighlight %}
 
 ### What does Jekyll Do?
 
