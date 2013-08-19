@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>
       
-        fatal &#58; Needed a single revision 的解决办法 - 
+        fatal &#58; Not a git repository 的解决办法 - 
       
       Share Something
     </title>
@@ -135,7 +135,7 @@
         
 <div class="page-header">
   <h1>
-    fatal &#58; Needed a single revision 的解决办法 
+    fatal &#58; Not a git repository 的解决办法 
     
   </h1>
 </div>
@@ -146,62 +146,38 @@
 
 <h2>问题</h2>
 
-<p>在 <code>Git Bash</code> 中执行 <code>git submodule update --init --recursive</code> 或之类的操作时可能会出现这样的提示：</p>
+<p>在 <code>Git Bash</code> 中执行与 <code>submodule</code> 相关操作时，有可能会出现以下提示：</p>
 
-<pre><code>fatal: Needed a single revision
-Unable to find current revision in submodule path 'third_party/foobar'
+<pre><code>fatal: Not a git repository: ../../../../..//c/some/path/.git/modules/third_party/boost
 </code></pre>
 
 <hr />
 
-<h2>解决方案一</h2>
+<h2>解决方案</h2>
 
-<p>这个多半是由于 <code>third_party/forbar</code> 这个 <code>submodule</code> 的 <code>url</code> 有所修改，处理步骤如下：</p>
-
-<div class="highlight"><pre><code class="bash"><span class="lineno">1</span> <span class="nv">$ </span>git submodule sync -- third_party/foobar
-<span class="lineno">2</span> <span class="nv">$ </span>git submodule update --init --recursive -- third_party/foobar
-</code></pre></div>
-
-
-<hr />
-
-<h2>解决方案二</h2>
-
-<p>如果仍然出现 <code>fatal: Needed a single revision</code> 的提示，则进行以下步骤</p>
+<p>这其实是由于目录路径太长导致的，处理方法如下：</p>
 
 <ul>
-<li>找到记载此 <code>submodule</code> <code>url</code> 的配置文件 <code>config</code> ，将其内有关此 <code>submodule</code>的配置删除。
+<li>找到此 <code>submodule</code> 的 <code>workspace</code> 目录。
 
 <ul>
-<li>假设根repo目录为 <code>C:/some/path</code> , 则 <code>config</code> 文件便位于 <code>C:/some/path/.git/config</code>, 编辑之，删除5-6两行：</li>
+<li>在本例中，其为 <code>C:/some/path/third_party/boost</code>。</li>
 </ul>
 </li>
-</ul>
-
-
-<div class="highlight"><pre><code class="ini"><span class="lineno">1</span> <span class="k">[submodule &quot;third_party/boost&quot;]</span>
-<span class="lineno">2</span> <span class="na">url</span> <span class="o">=</span> <span class="s">ssh://wisp@git.lab.infra.mail:1046/data/git/wisp/boost.git</span>
-<span class="lineno">3</span> <span class="k">[submodule &quot;third_party/gtest&quot;]</span>
-<span class="lineno">4</span> <span class="na">url</span> <span class="o">=</span> <span class="s">ssh://wisp@git.lab.infra.mail:1046/data/git/wisp/gtest.git</span>
-<span class="lineno">5</span> <span class="k">[submodule &quot;third_party/foobar&quot;]</span>
-<span class="lineno">6</span> <span class="na">url</span> <span class="o">=</span> <span class="s">git://github.com/imoldman/asio.git</span>
-</code></pre></div>
-
+<li>在上述目录中查找.git文件（<strong>注意是文件不是目录</strong>），其内记载了此submodule的.git目录的实际存放位置，打开它。
 
 <ul>
-<li>将这个 <code>submodule</code> 的 <code>.git</code> 目录删掉。
-
-<ul>
-<li>在本例中其目录为 <code>C:/some/path/.git/modules/third_party/foobar</code>，将其删掉。</li>
+<li>在本例中，它看起来大致是这样的： <code>gitdir: ../../../../..//c/some/path/.git/modules/third_party/boost</code></li>
 </ul>
 </li>
-<li>将这个 <code>submodule</code> 的 <code>workspace</code> 目录删掉。
+<li>很明显，这个目录跟报错的目录相同，也就是说这个问题是由于gitdir目录太长导致的，在这里修改的办法有两种：
 
 <ul>
-<li>在本例中其目录为 <code>C:/some/path/third_party/foobar</code>，将其删掉。</li>
+<li>将不需要的父目录移除，如可将上例改为 <code>gitdir: ../../.git/modules/third_party/boost</code></li>
+<li>将其改为绝对路径，如可将上例改为 <code>gitdir: /c/some/path/.git/modules/third_party/boost</code></li>
 </ul>
 </li>
-<li>执行 <code>git submodule update --init --recursive -- third_party/foobar</code></li>
+<li>执行 <code>git submodule update --init --recursive -- third_party/boost</code></li>
 </ul>
 
 
@@ -210,11 +186,11 @@ Unable to find current revision in submodule path 'third_party/foobar'
     <hr>
     <div class="pagination btn-group">
       
-        <a class="btn disabled prev">&larr; Previous</a>
+        <a class="btn prev" href="/blog/2013/08/18/git-how-to-fix-needed-a-single-revision" title="fatal &#58; Needed a single revision 的解决办法">&larr; Previous</a>
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next" href="/blog/2013/08/20/git-how-to-fix-not-a-git-repository" title="fatal &#58; Not a git repository 的解决办法">Next &rarr;</a>
+        <a class="btn next disabled">Next &rarr;</a>
       
     </div>
     <hr>
@@ -244,7 +220,7 @@ Unable to find current revision in submodule path 'third_party/foobar'
   <div class="span4">
     <section>
       <h4>Published</h4>
-      <div class="date"><span>18 August 2013</span></div>
+      <div class="date"><span>20 August 2013</span></div>
     </section>
     
       <section>

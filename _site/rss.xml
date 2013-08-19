@@ -5,10 +5,58 @@
         <description>Share Something - Oldman Li</description>
         <link>http://username.github.io</link>
         <link>http://username.github.io</link>
-        <lastBuildDate>2013-08-19T23:02:35+08:00</lastBuildDate>
-        <pubDate>2013-08-19T23:02:35+08:00</pubDate>
+        <lastBuildDate>2013-08-19T23:43:51+08:00</lastBuildDate>
+        <pubDate>2013-08-19T23:43:51+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>fatal &#58; Not a git repository 的解决办法</title>
+                <description>&lt;p&gt;&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/css/pygments/native.css&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;问题&lt;/h2&gt;
+
+&lt;p&gt;在 &lt;code&gt;Git Bash&lt;/code&gt; 中执行与 &lt;code&gt;submodule&lt;/code&gt; 相关操作时，有可能会出现以下提示：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;fatal: Not a git repository: ../../../../..//c/some/path/.git/modules/third_party/boost
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;解决方案&lt;/h2&gt;
+
+&lt;p&gt;这其实是由于目录路径太长导致的，处理方法如下：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;找到此 &lt;code&gt;submodule&lt;/code&gt; 的 &lt;code&gt;workspace&lt;/code&gt; 目录。
+
+&lt;ul&gt;
+&lt;li&gt;在本例中，其为 &lt;code&gt;C:/some/path/third_party/boost&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;在上述目录中查找.git文件（&lt;strong&gt;注意是文件不是目录&lt;/strong&gt;），其内记载了此submodule的.git目录的实际存放位置，打开它。
+
+&lt;ul&gt;
+&lt;li&gt;在本例中，它看起来大致是这样的： &lt;code&gt;gitdir: ../../../../..//c/some/path/.git/modules/third_party/boost&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;很明显，这个目录跟报错的目录相同，也就是说这个问题是由于gitdir目录太长导致的，在这里修改的办法有两种：
+
+&lt;ul&gt;
+&lt;li&gt;将不需要的父目录移除，如可将上例改为 &lt;code&gt;gitdir: ../../.git/modules/third_party/boost&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;将其改为绝对路径，如可将上例改为 &lt;code&gt;gitdir: /c/some/path/.git/modules/third_party/boost&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;执行 &lt;code&gt;git submodule update --init --recursive -- third_party/boost&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;这样就可以解决了。&lt;/p&gt;
+</description>
+                <link>http://username.github.io/blog/2013/08/20/git-how-to-fix-not-a-git-repository</link>
+                <guid>http://username.github.io/blog/2013/08/20/git-how-to-fix-not-a-git-repository</guid>
+                <pubDate>2013-08-20T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>fatal &#58; Needed a single revision 的解决办法</title>
