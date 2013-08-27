@@ -4,7 +4,7 @@
  <title>Share Something</title>
  <link href="http://username.github.io/" rel="self"/>
  <link href="http://username.github.io"/>
- <updated>2013-08-27T19:43:02+08:00</updated>
+ <updated>2013-08-27T22:50:38+08:00</updated>
  <id>http://username.github.io</id>
  <author>
    <name>Oldman Li</name>
@@ -36,19 +36,18 @@
 &lt;p&gt;关于参数，这里有几个技巧：&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;gtestfilter&lt;/code&gt;
+&lt;li&gt;&lt;code&gt;--gtestfilter&lt;/code&gt;
 
 &lt;ul&gt;
 &lt;li&gt;使用&lt;code&gt;--gtestfilter&lt;/code&gt;可以只运行某一个单元测试，使开发过程不受其他单元测试的影响，加快开发节奏。&lt;/li&gt;
 &lt;li&gt;如&lt;code&gt;--gtestfilter=FooBar.*&lt;/code&gt;便可以只运行FooBar族的单元测试。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--gtestbreakonfailure --gtestcatch_exceptions=0&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;默认情况下，为了便于自动化测试，&lt;code&gt;gtest&lt;/code&gt;在遇到错误和异常时并不会通知调试器。
+&lt;li&gt;&lt;code&gt;--gtest_break_on_failure --gtest_catch_exceptions=0&lt;/code&gt;
 
 &lt;ul&gt;
-&lt;li&gt;不过这但这却不方便我们开发，比如&lt;code&gt;assert()&lt;/code&gt;触发时便不再能直接定位问题现场。&lt;/li&gt;
-&lt;li&gt;如果要修改此默认行为，可以在运行参数中添加&lt;code&gt;--gtestbreakonfailure --gtestcatch_exceptions=0&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;默认情况下，为了便于自动化测试，&lt;code&gt;gtest&lt;/code&gt;在遇到错误和异常时并不会通知调试器。不过这并不方便我们开发，尤其是&lt;code&gt;EXCEPT_*()&lt;/code&gt;触发时不能直接定位问题现场。&lt;/li&gt;
+&lt;li&gt;如果要修改此默认行为，可以在运行参数中添加&lt;code&gt;--gtest_break_on_failure --gtest_catch_exceptions=0&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
