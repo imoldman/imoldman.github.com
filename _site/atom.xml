@@ -4,13 +4,147 @@
  <title>Share Something</title>
  <link href="http://username.github.io/" rel="self"/>
  <link href="http://username.github.io"/>
- <updated>2013-08-27T22:50:38+08:00</updated>
+ <updated>2014-04-27T21:20:35+08:00</updated>
  <id>http://username.github.io</id>
  <author>
    <name>Oldman Li</name>
    <email>imoldman.com@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>C++14语言特性一览</title>
+   <link href="http://username.github.io/blog/2014/04/27/an-overview-of-cpp14-language-features"/>
+   <updated>2014-04-27T00:00:00+08:00</updated>
+   <id>http://username.github.io/blog/2014/04/27/an-overview-of-cpp14-language-features</id>
+   <content type="html">&lt;p&gt;&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/css/pygments/native.css&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;原文连接：&lt;a href=&quot;http://cpprocks.com/an-overview-of-c14-language-features/&quot;&gt;http://cpprocks.com/an-overview-of-c14-language-features/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;这篇文章中，我讲着重讲解&lt;code&gt;C++14&lt;/code&gt;标准草案中的一些语言新特性。这些是从我的《&lt;a href=&quot;http://cpprocks.com/&quot;&gt;C++11 Rocks:VS2013 Edition&lt;/a&gt;》中摘录出来的。在&lt;a href=&quot;http://cpprocks.com/c1114-compiler-and-library-shootout/&quot;&gt;上一篇文章&lt;/a&gt;中，我已经介绍了不同编译器对&lt;code&gt;C++14&lt;/code&gt;支持的情况。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;普通函数的返回类型推演&lt;/h2&gt;
+
+&lt;p&gt;编译器可以推演这种函数的返回类型：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cpp&quot;&gt;&lt;span class=&quot;k&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;square&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如代码所示，你使用&lt;code&gt;auto&lt;/code&gt;开始函数的声明，但是并没有在结尾处指定返回类型(即使用&lt;code&gt;trailing decltype&lt;/code&gt;表达式)。此时，编译器可以自己推演出返回类型。这基本上是把&lt;code&gt;VS2013&lt;/code&gt;中对匿名函数(即&lt;code&gt;lambda&lt;/code&gt;表达式)返回类型的推演支持扩展到普通函数上.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;泛型lambda&lt;/h2&gt;
+
+&lt;p&gt;当需要给&lt;code&gt;lambda&lt;/code&gt;表达式的参数指定类型时，你可以不使用具体类型，而使用&lt;code&gt;auto&lt;/code&gt;。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cpp&quot;&gt;&lt;span class=&quot;k&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[](&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果用&lt;code&gt;C++&lt;/code&gt;伪代码表示，那么这样的定义等价于：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cpp&quot;&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lambda1&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typename&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;typename&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decltype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lambda1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;所以使用&lt;code&gt;auto&lt;/code&gt;作为函数参数类型等价于将函数调用模板化。因此普通&lt;code&gt;auto&lt;/code&gt;变量的推演规则在这里并不适用，此处使用的是模板参数的推演规则。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;扩展的lambda捕获&lt;/h2&gt;
+
+&lt;p&gt;另一个对&lt;code&gt;lambda&lt;/code&gt;表达式的修改牵扯到变量捕获。在&lt;code&gt;C++14&lt;/code&gt;中，参数捕获可以包含一个初始化的表达式：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cpp&quot;&gt;&lt;span class=&quot;k&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;now&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;system_clock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt; 
+&lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// returns current time&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在这个例子中，val赋值成了当前时间，然后&lt;code&gt;lambda&lt;/code&gt;表达式将其返回了出去。val并不需要是一个已经存在的变量，所以这是一种给&lt;code&gt;lambda&lt;/code&gt;表达式增加数据成员的有效方法。这些成员的类型由编译器来推演。&lt;/p&gt;
+
+&lt;p&gt;这样，仅能&lt;code&gt;move&lt;/code&gt;（不能&lt;code&gt;copy&lt;/code&gt;）的变量就可以被捕获了，而这在&lt;code&gt;C++11&lt;/code&gt;中是不可能实现的。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cpp&quot;&gt;&lt;span class=&quot;k&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;make_unique&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lmb&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;move&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;虽然真正发生的事情有点复杂，但是这就相当于通过&lt;code&gt;move&lt;/code&gt;对一个变量进行了捕获。实际上，&lt;code&gt;lambda&lt;/code&gt;表达式中的捕获语句块声明了一个名为&lt;code&gt;p&lt;/code&gt;的新数据成员，而这个成员是通过外面已经被转化为右值引用的&lt;code&gt;p&lt;/code&gt;初始化的，&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;对constexpr函数限制的修订&lt;/h2&gt;
+
+&lt;p&gt;标准提案列出了&lt;code&gt;constexpr&lt;/code&gt;函数中新的可以使用的东西，包括：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在&lt;code&gt;constexpr&lt;/code&gt;中声明变量，但是不能声明&lt;code&gt;static&lt;/code&gt;，&lt;code&gt;thread_local&lt;/code&gt;以及未初始化的变量&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;if&lt;/code&gt;和&lt;code&gt;switch&lt;/code&gt;语句&lt;/li&gt;
+&lt;li&gt;循环结构，包括&lt;code&gt;range-based for&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;对对象的修改，这些对象要求其生命周期开始于常量表达式&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;这应该会使&lt;code&gt;constexpr&lt;/code&gt;函数更灵活。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;constexpr变量模板化&lt;/h2&gt;
+
+&lt;p&gt;除了类型模板和函数模板，&lt;code&gt;C++14&lt;/code&gt;还将允许&lt;code&gt;constexpr&lt;/code&gt;模版化。这是个展示其如何工作的例子。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cpp&quot;&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typename&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;constexpr&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;3.1415926535897932385&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;没有新的语法，哪些模板上已经存在的语法简单应用在了这里。这种变量可以用在泛型函数中。如：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cpp&quot;&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typename&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;area_of_circle_with_radius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这条修改的意思是说尽管已经有了一个简单的初始化表达式，但是泛型函数中类型定制有时候还是有用的。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;更多修改&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;C++14&lt;/code&gt;还包括一些其他的语言特性修改：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;增加了另外一种推演规则可以允许你将&lt;code&gt;decltype&lt;/code&gt;上的推演规则应用在&lt;code&gt;auto&lt;/code&gt;变量上。&lt;/li&gt;
+&lt;li&gt;集合初始化对于类的成员初始化同样有效。&lt;/li&gt;
+&lt;li&gt;增加了内置的以&lt;code&gt;0b&lt;/code&gt;开头的二进制字面量。&lt;/li&gt;
+&lt;li&gt;可能允许以单引号分割的数的字面量。&lt;/li&gt;
+&lt;li&gt;增加了另一个名为&lt;code&gt;[[deprecated]]&lt;/code&gt;标准属性，用来标记部分代码是不推荐使用的。&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code&gt;C++14&lt;/code&gt;标准有望今年完成。好消息是向编译器中添加新特性的工作已经全面展开，这里提及的部分特性现在已经可以使用了。&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>gtest运行参数使用技巧</title>
@@ -31,7 +165,7 @@
 
 &lt;h2&gt;运行参数&lt;/h2&gt;
 
-&lt;p&gt;为了方便使用，gtest提供了一系列的命令行参数，详情可以参看&lt;a href=&quot;http://www.cnblogs.com/coderzh/archive/2009/04/06/1426755.html&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;为了方便使用，gtest提供了一系列的命令行参数，详情可以参看&lt;a href=&quot;http://www.cnblogs.com/coderzh/archive/2009/04/10/1432789.html&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;
 
 &lt;p&gt;关于参数，这里有几个技巧：&lt;/p&gt;
 
