@@ -12,7 +12,7 @@ tags : [c++, c++11, c++14]
 
 原文连接：[http://cpprocks.com/an-overview-of-c14-language-features/](http://cpprocks.com/an-overview-of-c14-language-features/)
 
-这篇文章中，我讲着重讲解`C++14`标准草案中的一些语言新特性。这些是从我的《[C++11 Rocks:VS2013 Edition](http://cpprocks.com/)》中摘录出来的。在[上一篇文章](http://cpprocks.com/c1114-compiler-and-library-shootout/)中，我已经介绍了不同编译器对`C++14`支持的情况。
+这篇文章中，我将着重讲解`C++14`标准草案中的一些语言新特性。这些是从我的《[C++11 Rocks: VS2013 Edition](http://cpprocks.com/)》中摘录出来的。在[上一篇文章](http://cpprocks.com/c1114-compiler-and-library-shootout/)中，我已经介绍了不同编译器对`C++14`支持的情况。
 
 ---
 
@@ -27,7 +27,7 @@ auto square(int n)
 }
 {% endhighlight %}
     
-如代码所示，你使用`auto`开始函数的声明，但是并没有在结尾处指定返回类型(即使用`trailing decltype`表达式)。此时，编译器可以自己推演出返回类型。这基本上是把`VS2013`中对匿名函数(即`lambda`表达式)返回类型的推演支持扩展到普通函数上.
+如代码所示，你使用`auto`开始函数的声明，但是并没有在结尾处指定返回类型（即使用`trailing decltype`表达式）。此时，编译器可以自己推演出返回类型。这基本上是把`VS2013`中对匿名函数（即`lambda`表达式）返回类型的推演支持扩展到普通函数上.
 
 ---
 
@@ -74,7 +74,7 @@ auto p = make_unique<int>(10);
 auto lmb = [p = move(p)] { return *p; }
 {% endhighlight %}
 
-虽然真正发生的事情有点复杂，但是这就相当于通过`move`对一个变量进行了捕获。实际上，`lambda`表达式中的捕获语句块声明了一个名为`p`的新数据成员，而这个成员是通过外面已经被转化为右值引用的`p`初始化的，
+虽然真正发生的事情有点复杂，但是这就相当于通过`move`对一个变量进行了捕获。实际上，`lambda`表达式中的捕获语句块声明了一个名为`p`的新数据成员，而这个成员是通过外面已经被转化为右值引用的`p`初始化的。
 
 ---
 
@@ -100,7 +100,7 @@ template<typename T>
 constexpr auto T pi = T(3.1415926535897932385);
 {% endhighlight %}
 
-没有新的语法，哪些模板上已经存在的语法简单应用在了这里。这种变量可以用在泛型函数中。如：
+没有新的语法，那些模板上已经存在的语法简单应用在了这里。这种变量可以用在泛型函数中。如：
 
 {% highlight cpp%}
 template<typename T>

@@ -146,7 +146,7 @@
 
 <p>原文连接：<a href="http://cpprocks.com/an-overview-of-c14-language-features/">http://cpprocks.com/an-overview-of-c14-language-features/</a></p>
 
-<p>这篇文章中，我讲着重讲解<code>C++14</code>标准草案中的一些语言新特性。这些是从我的《<a href="http://cpprocks.com/">C++11 Rocks:VS2013 Edition</a>》中摘录出来的。在<a href="http://cpprocks.com/c1114-compiler-and-library-shootout/">上一篇文章</a>中，我已经介绍了不同编译器对<code>C++14</code>支持的情况。</p>
+<p>这篇文章中，我将着重讲解<code>C++14</code>标准草案中的一些语言新特性。这些是从我的《<a href="http://cpprocks.com/">C++11 Rocks: VS2013 Edition</a>》中摘录出来的。在<a href="http://cpprocks.com/c1114-compiler-and-library-shootout/">上一篇文章</a>中，我已经介绍了不同编译器对<code>C++14</code>支持的情况。</p>
 
 <hr />
 
@@ -161,7 +161,7 @@
 </code></pre></div>
 
 
-<p>如代码所示，你使用<code>auto</code>开始函数的声明，但是并没有在结尾处指定返回类型(即使用<code>trailing decltype</code>表达式)。此时，编译器可以自己推演出返回类型。这基本上是把<code>VS2013</code>中对匿名函数(即<code>lambda</code>表达式)返回类型的推演支持扩展到普通函数上.</p>
+<p>如代码所示，你使用<code>auto</code>开始函数的声明，但是并没有在结尾处指定返回类型（即使用<code>trailing decltype</code>表达式）。此时，编译器可以自己推演出返回类型。这基本上是把<code>VS2013</code>中对匿名函数（即<code>lambda</code>表达式）返回类型的推演支持扩展到普通函数上.</p>
 
 <hr />
 
@@ -209,7 +209,7 @@
 </code></pre></div>
 
 
-<p>虽然真正发生的事情有点复杂，但是这就相当于通过<code>move</code>对一个变量进行了捕获。实际上，<code>lambda</code>表达式中的捕获语句块声明了一个名为<code>p</code>的新数据成员，而这个成员是通过外面已经被转化为右值引用的<code>p</code>初始化的，</p>
+<p>虽然真正发生的事情有点复杂，但是这就相当于通过<code>move</code>对一个变量进行了捕获。实际上，<code>lambda</code>表达式中的捕获语句块声明了一个名为<code>p</code>的新数据成员，而这个成员是通过外面已经被转化为右值引用的<code>p</code>初始化的。</p>
 
 <hr />
 
@@ -238,7 +238,7 @@
 </code></pre></div>
 
 
-<p>没有新的语法，哪些模板上已经存在的语法简单应用在了这里。这种变量可以用在泛型函数中。如：</p>
+<p>没有新的语法，那些模板上已经存在的语法简单应用在了这里。这种变量可以用在泛型函数中。如：</p>
 
 <div class="highlight"><pre><code class="cpp"><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
 <span class="n">T</span> <span class="n">area_of_circle_with_radius</span><span class="p">(</span><span class="n">T</span> <span class="n">r</span><span class="p">)</span> 

@@ -4,7 +4,7 @@
  <title>Share Something</title>
  <link href="http://username.github.io/" rel="self"/>
  <link href="http://username.github.io"/>
- <updated>2014-04-27T21:20:35+08:00</updated>
+ <updated>2014-04-27T23:38:55+08:00</updated>
  <id>http://username.github.io</id>
  <author>
    <name>Oldman Li</name>
@@ -21,7 +21,7 @@
 
 &lt;p&gt;原文连接：&lt;a href=&quot;http://cpprocks.com/an-overview-of-c14-language-features/&quot;&gt;http://cpprocks.com/an-overview-of-c14-language-features/&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;这篇文章中，我讲着重讲解&lt;code&gt;C++14&lt;/code&gt;标准草案中的一些语言新特性。这些是从我的《&lt;a href=&quot;http://cpprocks.com/&quot;&gt;C++11 Rocks:VS2013 Edition&lt;/a&gt;》中摘录出来的。在&lt;a href=&quot;http://cpprocks.com/c1114-compiler-and-library-shootout/&quot;&gt;上一篇文章&lt;/a&gt;中，我已经介绍了不同编译器对&lt;code&gt;C++14&lt;/code&gt;支持的情况。&lt;/p&gt;
+&lt;p&gt;这篇文章中，我将着重讲解&lt;code&gt;C++14&lt;/code&gt;标准草案中的一些语言新特性。这些是从我的《&lt;a href=&quot;http://cpprocks.com/&quot;&gt;C++11 Rocks: VS2013 Edition&lt;/a&gt;》中摘录出来的。在&lt;a href=&quot;http://cpprocks.com/c1114-compiler-and-library-shootout/&quot;&gt;上一篇文章&lt;/a&gt;中，我已经介绍了不同编译器对&lt;code&gt;C++14&lt;/code&gt;支持的情况。&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -36,7 +36,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;如代码所示，你使用&lt;code&gt;auto&lt;/code&gt;开始函数的声明，但是并没有在结尾处指定返回类型(即使用&lt;code&gt;trailing decltype&lt;/code&gt;表达式)。此时，编译器可以自己推演出返回类型。这基本上是把&lt;code&gt;VS2013&lt;/code&gt;中对匿名函数(即&lt;code&gt;lambda&lt;/code&gt;表达式)返回类型的推演支持扩展到普通函数上.&lt;/p&gt;
+&lt;p&gt;如代码所示，你使用&lt;code&gt;auto&lt;/code&gt;开始函数的声明，但是并没有在结尾处指定返回类型（即使用&lt;code&gt;trailing decltype&lt;/code&gt;表达式）。此时，编译器可以自己推演出返回类型。这基本上是把&lt;code&gt;VS2013&lt;/code&gt;中对匿名函数（即&lt;code&gt;lambda&lt;/code&gt;表达式）返回类型的推演支持扩展到普通函数上.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -84,7 +84,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;虽然真正发生的事情有点复杂，但是这就相当于通过&lt;code&gt;move&lt;/code&gt;对一个变量进行了捕获。实际上，&lt;code&gt;lambda&lt;/code&gt;表达式中的捕获语句块声明了一个名为&lt;code&gt;p&lt;/code&gt;的新数据成员，而这个成员是通过外面已经被转化为右值引用的&lt;code&gt;p&lt;/code&gt;初始化的，&lt;/p&gt;
+&lt;p&gt;虽然真正发生的事情有点复杂，但是这就相当于通过&lt;code&gt;move&lt;/code&gt;对一个变量进行了捕获。实际上，&lt;code&gt;lambda&lt;/code&gt;表达式中的捕获语句块声明了一个名为&lt;code&gt;p&lt;/code&gt;的新数据成员，而这个成员是通过外面已经被转化为右值引用的&lt;code&gt;p&lt;/code&gt;初始化的。&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -113,7 +113,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;没有新的语法，哪些模板上已经存在的语法简单应用在了这里。这种变量可以用在泛型函数中。如：&lt;/p&gt;
+&lt;p&gt;没有新的语法，那些模板上已经存在的语法简单应用在了这里。这种变量可以用在泛型函数中。如：&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cpp&quot;&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typename&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;area_of_circle_with_radius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
