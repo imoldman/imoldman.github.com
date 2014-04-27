@@ -2,12 +2,12 @@
 layout: post
 category : c++
 title : gtest运行参数使用技巧
-tags : [gtest]
+tags : [c++, gtest]
 ---
 
 ## 简介
 
-gtest全称为 Google C++ Testing Framework(官方主页), 是Google开发的一个单元测试框架，现阶段，我们使用它作为各个平台的单元测试框架基础。
+gtest全称为 [Google C++ Testing Framework](https://code.google.com/p/googletest/), 是Google开发的一个单元测试框架，现阶段，我们使用它作为各个平台的单元测试框架基础。
 
 ## 资料
 - [易上手的教程](https://code.google.com/p/googletest/wiki/Primer)。

@@ -4,7 +4,7 @@
  <title>Share Something</title>
  <link href="http://username.github.io/" rel="self"/>
  <link href="http://username.github.io"/>
- <updated>2014-04-27T23:38:55+08:00</updated>
+ <updated>2014-04-27T23:42:26+08:00</updated>
  <id>http://username.github.io</id>
  <author>
    <name>Oldman Li</name>
@@ -153,7 +153,7 @@
    <id>http://username.github.io/blog/2013/08/27/tips-for-use-gooogle-cpp-testing-framework</id>
    <content type="html">&lt;h2&gt;简介&lt;/h2&gt;
 
-&lt;p&gt;gtest全称为 Google C++ Testing Framework(官方主页), 是Google开发的一个单元测试框架，现阶段，我们使用它作为各个平台的单元测试框架基础。&lt;/p&gt;
+&lt;p&gt;gtest全称为 &lt;a href=&quot;https://code.google.com/p/googletest/&quot;&gt;Google C++ Testing Framework&lt;/a&gt;, 是Google开发的一个单元测试框架，现阶段，我们使用它作为各个平台的单元测试框架基础。&lt;/p&gt;
 
 &lt;h2&gt;资料&lt;/h2&gt;
 

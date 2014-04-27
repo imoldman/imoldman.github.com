@@ -5,8 +5,8 @@
         <description>Share Something - Oldman Li</description>
         <link>http://username.github.io</link>
         <link>http://username.github.io</link>
-        <lastBuildDate>2014-04-27T23:38:55+08:00</lastBuildDate>
-        <pubDate>2014-04-27T23:38:55+08:00</pubDate>
+        <lastBuildDate>2014-04-27T23:42:26+08:00</lastBuildDate>
+        <pubDate>2014-04-27T23:42:26+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -148,7 +148,7 @@
                 <title>gtest运行参数使用技巧</title>
                 <description>&lt;h2&gt;简介&lt;/h2&gt;
 
-&lt;p&gt;gtest全称为 Google C++ Testing Framework(官方主页), 是Google开发的一个单元测试框架，现阶段，我们使用它作为各个平台的单元测试框架基础。&lt;/p&gt;
+&lt;p&gt;gtest全称为 &lt;a href=&quot;https://code.google.com/p/googletest/&quot;&gt;Google C++ Testing Framework&lt;/a&gt;, 是Google开发的一个单元测试框架，现阶段，我们使用它作为各个平台的单元测试框架基础。&lt;/p&gt;
 
 &lt;h2&gt;资料&lt;/h2&gt;
 
