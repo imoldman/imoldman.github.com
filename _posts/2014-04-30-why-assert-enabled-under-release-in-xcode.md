@@ -1,6 +1,6 @@
 ---
 layout: post
-category : trap
+category : tip-trap
 title : assert出问题了？
 tags : [c++, objective-c, ios]
 ---

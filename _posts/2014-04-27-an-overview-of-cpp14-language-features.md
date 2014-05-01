@@ -1,6 +1,6 @@
 ---
 layout: post
-category : c++
+category : intro
 title : C++14语言特性一览
 tags : [c++, c++11, c++14]
 ---
