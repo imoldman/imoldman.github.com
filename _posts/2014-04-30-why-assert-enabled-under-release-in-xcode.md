@@ -55,11 +55,11 @@ ___
 
 ![](http://imoldman-blog.qiniudn.com/assert_3.png)
 
-也就是说， `NDEBUG`确实是语言的标准，但是标准只定义了它是怎么影响`assert`的， 并没有定义编译器应该在什么情况下定义`NDEBUG`，所以`XCode`在`Relase`模式下没有定义也是合乎标准的。
+也就是说， `NDEBUG`确实是语言的标准，但是标准只定义了它是怎么影响`assert`的， 并没有定义编译器应该在什么情况下定义`NDEBUG`，所以`Xcode`在`Relase`模式下没有定义也是合乎标准的。
 ___
 ## 继续挖掘
 
-问题找到原因了，可是我还是不死心，那如果`XCode`是这样对待`assert`的， 那么自家的`NSCAssert`呢？
+问题找到原因了，可是我还是不死心，那如果`Xcode`是这样对待`assert`的， 那么自家的`NSCAssert`呢？
 
 在`Foundation/NSException.h`中，`NSCAssert`大致是这样的定义的：
 
