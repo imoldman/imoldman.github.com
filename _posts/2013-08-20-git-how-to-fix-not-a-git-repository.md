@@ -1,6 +1,6 @@
 ---
 layout: post
-category : tip-trap
+category : trap
 title : fatal &#58; Not a git repository 的解决办法
 tags : [git]
 ---

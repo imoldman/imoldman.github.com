@@ -1,6 +1,6 @@
 ---
 layout: post
-category : tip-trap
+category : trap
 title : fatal &#58; Needed a single revision 的解决办法
 tags : [git]
 ---

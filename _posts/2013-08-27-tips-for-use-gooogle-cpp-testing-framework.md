@@ -1,6 +1,6 @@
 ---
 layout: post
-category : tip-trap
+category : tip
 title : gtest运行参数使用技巧
 tags : [c++, gtest]
 ---
