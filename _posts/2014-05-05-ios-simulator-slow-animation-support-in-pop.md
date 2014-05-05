@@ -2,7 +2,7 @@
 layout: post
 category : tip
 title : 如何让自定义动画支持慢速播放(iOS Simulator)
-tags : [c++, objective-c, ios]
+tags : [objective-c, ios]
 ---
 
 {% include JB/setup %}
@@ -11,7 +11,7 @@ tags : [c++, objective-c, ios]
 
 ## 前言
 
-近来[`pop`](https://github.com/facebook/pop)盛行，我也不能免俗，跑去学习了一遭。`pop`的动画机制和使用方式自有[其他人来解释和说明](http://weibo.com/1659808677/B2RGslf3J)，不需要我再罗列一遍。这里我说一个比较有意思的东西。
+近来`pop`([链接](https://github.com/facebook/pop))盛行，我也不能免俗，跑去学习了一遭。`pop`的动画机制和使用方式自有[其他人来解释和说明](http://weibo.com/1659808677/B2RGslf3J)，不需要我再罗列一遍。这里我说一个比较有意思的东西。
 ___
 
 ## 阐述
@@ -68,7 +68,7 @@ CGFloat POPAnimationDragCoefficient()
 }
 {% endhighlight %}
 
-不难发现，这里的关键就是一个名叫`UIAnimationDragCoefficient`的私有API，通过[`iphonedevwiki`](http://iphonedevwiki.net/index.php/UIViewAnimationState)了解到它的解释是这样的。
+不难发现，这里的关键就是一个名叫`UIAnimationDragCoefficient`的私有API，通过`iphonedevwiki`([链接](http://iphonedevwiki.net/index.php/UIViewAnimationState))了解到它的解释是这样的。
 
 	The drag coefficient is a multiplier applied on time measurements. A large drag coefficient can slow down animations.
 	
